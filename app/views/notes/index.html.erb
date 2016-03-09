@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<h2>Wypożyczone od innych</h2>
+<p>  <%= "Twój identyfikator: "+current_user.id.to_s %> </p>
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Borrower</th>
+      <th>Borrower_id</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notes.each do |note| %>
+      <% if note.borrower_id==current_user.id %>
+        <tr>
+          <td><%= note.description %></td>
+          <td><%= note.borrower %></td>
+          <td><%= note.borrower_id.to_s %></td>
+          <td><%= link_to 'Show', note %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h2>Pożyczone innym</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Borrower</th>
+      <th>Borrower_id</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notes.each do |note| %>
+      <% if note.user_id==current_user.id %>
+        <tr>
+          <td><%= note.description %></td>
+          <td><%= note.borrower %></td>
+          <td><%= note.borrower_id.to_s %></td>
+          <td><%= link_to 'Show', note %></td>
+          <td><%= link_to 'Edit', edit_note_path(note) %></td>
+          <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'New Note', new_note_path %>

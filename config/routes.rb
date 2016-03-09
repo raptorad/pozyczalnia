@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  resources :notes
+  get 'home/index'
+
+  get 'home/about'
+
+  get 'home/contact'
+
+  get 'home/faq'
+
+  devise_for :users
+  root "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
